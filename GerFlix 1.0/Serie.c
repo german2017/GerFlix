@@ -55,5 +55,3 @@ void mostrarListaSeries(eSerie series[], int TAMSERIE)
     printf("\n");
 }
 
-
-
