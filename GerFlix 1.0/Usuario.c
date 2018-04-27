@@ -55,15 +55,12 @@ void mostrarUsuarioConSuSerie(eUsuario usuarios[], int TAMUSUARIO, eSerie series
     int j;
     for(i=0; i<TAMUSUARIO; i++)
     {
-        if(usuarios[i].estado != 0)
+        for(j=0; j<TAMSERIE; j++)
         {
-            for(j=0; j<TAMSERIE; j++)
+            if(usuarios[i].estado == 1 && usuarios[i].idSerie == series[j].idSerie)
             {
-                if(usuarios[i].idSerie == series[j].idSerie)
-                {
-                    printf("ID de usuario: %d | %s. La serie que mira es: %s\n", usuarios[i].idUsuario, usuarios[i].nombre, series[j].nombre);
-                    break;
-                }
+                printf("ID de usuario: %d | %s. La serie que mira es: %s\n", usuarios[i].idUsuario, usuarios[i].nombre, series[j].nombre);
+                break;
             }
         }
     }
@@ -76,12 +73,12 @@ void mostrarSerieConSusEspectadores(eSerie series[], int TAMSERIE, eUsuario usua
     int j;
     for(i=0; i<TAMSERIE; i++)
     {
-        if(series[i].estado != 0)
+        if(series[i].estado == 1)
         {
             printf("\nLa serie: %s es vista por:\n", series[i].nombre);
             for(j=0; j<TAMUSUARIO; j++)
             {
-                if(usuarios[j].estado != 0 && series[i].idSerie == usuarios[j].idSerie)
+                if(usuarios[j].estado == 1 && series[i].idSerie == usuarios[j].idSerie)
                 {
                     printf("-%s ID: %d- ", usuarios[j].nombre, usuarios[j].idUsuario);
                 }
@@ -191,10 +188,10 @@ void bajaUsuario(eUsuario usuarios[], int TAMUSUARIO)
         scanf("%d", &idTemp);
         aBuscar = buscarIdUsuario(usuarios, TAMUSUARIO, idTemp);
     }
-    usuarios[aBuscar].idUsuario=0;
-    usuarios[aBuscar].idSerie=0;
+    //usuarios[aBuscar].idUsuario=0; No hace falta destruir los demàs campos. Sòlo cambiar estado de 1 a 0.
+    //usuarios[aBuscar].idSerie=0;   Por si se quisiera recuperar informaciòn.
     usuarios[aBuscar].estado = 0;
-    strcpy(usuarios[aBuscar].nombre, "");
+    //strcpy(usuarios[aBuscar].nombre, "");
     printf("Usuario dado de baja correctamente.\n");
 }
 
