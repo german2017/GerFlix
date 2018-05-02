@@ -18,6 +18,6 @@ void mostrarSerieConSusEspectadores(eSerie[], int, eUsuario[], int);
 int buscarEspacio(eUsuario[], int);
 void altaUsuario(eUsuario[], int, int);
 int validarIdUsuario(eUsuario[], int, int);
-void modificarUsuario(eUsuario[], int);
+void modificarUsuario(eUsuario[], int, eSerie[], int);
 int buscarIdUsuario(eUsuario[], int, int);
 void bajaUsuario(eUsuario[], int);

@@ -57,7 +57,7 @@ int main()
                 }
                 break;
             case 6:
-                modificarUsuario(listaDeUsuarios, TAMUSUARIO);
+                modificarUsuario(listaDeUsuarios, TAMUSUARIO, listaDeSeries, TAMSERIE);
                 break;
             case 7:
                 bajaUsuario(listaDeUsuarios, TAMUSUARIO);

@@ -55,15 +55,20 @@ void mostrarUsuarioConSuSerie(eUsuario usuarios[], int TAMUSUARIO, eSerie series
     int j;
     for(i=0; i<TAMUSUARIO; i++)
     {
-        for(j=0; j<TAMSERIE; j++)
+        if(usuarios[i].estado == 1)
         {
-            if(usuarios[i].estado == 1 && usuarios[i].idSerie == series[j].idSerie)
+            printf("\nID de usuario: %d | %s. ",usuarios[i].idUsuario, usuarios[i].nombre);
+            for(j=0; j<TAMSERIE; j++)
             {
-                printf("ID de usuario: %d | %s. La serie que mira es: %s\n", usuarios[i].idUsuario, usuarios[i].nombre, series[j].nombre);
-                break;
+                if(series[j].estado == 1 && usuarios[i].idSerie == series[j].idSerie)
+                {
+                    printf(" La serie que mira es: %s",series[j].nombre);
+                    break;
+                }
             }
         }
     }
+    printf("\n");
     printf("\n");
 }
 
@@ -119,6 +124,13 @@ void altaUsuario(eUsuario nuevoUsuario[], int TAMUSUARIO, int lugar)
     fflush(stdin);
     gets(nuevoUsuario[lugar].nombre);
     printf("Ingrese el ID de la serie elegida por el nuevo usuario: \n");
+    /*for(i=0;i<TAMSERIE;i++)
+    {
+        if(series[i].estado == 1)
+        {
+            printf("(%d: %s - )",series[i].idSerie, series[i].nombre);
+        }
+    }*/
     scanf("%d", &nuevoUsuario[lugar].idSerie);
     nuevoUsuario[lugar].estado = 1;
     printf("Usuario dado de alta correctamente.\n");
@@ -128,7 +140,7 @@ void altaUsuario(eUsuario nuevoUsuario[], int TAMUSUARIO, int lugar)
 int validarIdUsuario(eUsuario usuarios[], int TAMUSUARIO, int idABuscar)
 {
     int i;
-    for(i=0;i<TAMUSUARIO;i++)
+    for(i=0; i<TAMUSUARIO; i++)
     {
         if(usuarios[i].estado == 1 && idABuscar == usuarios[i].idUsuario)
         {
@@ -139,8 +151,9 @@ int validarIdUsuario(eUsuario usuarios[], int TAMUSUARIO, int idABuscar)
     return idABuscar;
 }
 
-void modificarUsuario(eUsuario usuarios[], int TAMUSUARIO)
+void modificarUsuario(eUsuario usuarios[], int TAMUSUARIO, eSerie series[], int TAMSERIE)
 {
+    int i;
     int idTemp;
     int aBuscar;
     printf("ingrese el ID del usuario a modificar: ");
@@ -156,6 +169,15 @@ void modificarUsuario(eUsuario usuarios[], int TAMUSUARIO)
     fflush(stdin);
     gets(usuarios[aBuscar].nombre);
     printf("Ingrese el ID de la nueva serie elegida: \n");
+    printf("( ");
+    for(i=0;i<TAMSERIE;i++)
+    {
+        if(series[i].estado == 1)
+        {
+            printf("%d: %s ",series[i].idSerie, series[i].nombre);
+        }
+    }
+    printf(")\n");
     scanf("%d", &usuarios[aBuscar].idSerie);
     printf("Usuario modificado correctamente.\n");
 }
@@ -164,7 +186,7 @@ int buscarIdUsuario(eUsuario usuarios[], int TAMUSUARIO, int idTemp)
 {
     int i;
     int aBuscar=-1;
-    for(i=0;i<TAMUSUARIO;i++)
+    for(i=0; i<TAMUSUARIO; i++)
     {
         if(usuarios[i].idUsuario == idTemp)
         {
@@ -194,4 +216,3 @@ void bajaUsuario(eUsuario usuarios[], int TAMUSUARIO)
     //strcpy(usuarios[aBuscar].nombre, "");
     printf("Usuario dado de baja correctamente.\n");
 }
-
