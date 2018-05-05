@@ -1,4 +1,3 @@
-
 typedef struct
 {
     int idSerie;
@@ -11,4 +10,5 @@ typedef struct
 void inicializarSeriesEstado(eSerie[], int);
 void inicializarSeriesHardCode(eSerie[]);
 void mostrarListaSeries(eSerie[], int);
+
 
